@@ -1,5 +1,9 @@
-<% @products.each do |p| %>
-  <%= p.name %>
-  <%= link_to "Edit", edit_product_path(p), class: 'button' %>
-  <%= link_to "Delete", product_path(p), class: 'button', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
-<% end %>
+
+  <% @products.each do |p| %>
+  <div class="col-md-3 mb-4 px-5 text-center">
+    <%= p.name %>
+    <%= image_tag p.image, class:"img-fluid rounded mb-3" %>
+    <%= link_to "Edit", edit_product_path(p), class: 'button mb-3' %>
+    <%= link_to "Delete", product_path(p), class: 'button mb-3', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+  </div>
+  <% end %>
