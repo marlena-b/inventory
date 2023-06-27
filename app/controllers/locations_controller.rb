@@ -28,7 +28,7 @@ class LocationsController < ApplicationController
 
   def update
     @location = Location.find(params[:id])
-    if @location.update
+    if @location.update(location_params)
       redirect_to @location
     else
       render :edit, status: :unprocessable_entity
@@ -44,6 +44,6 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:name, :address)
+    params.require(:location).permit(:name, :address, :image)
   end
 end
