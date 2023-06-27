@@ -2,33 +2,7 @@
   <div class="col-6">
     <h1>Edit product</h1>
     <div class="border rounded bg-white p-4">
-      <%= form_with(model: @product) do |f| %>
-
-        <div class="col-auto">
-          <%= f.label :name %>
-          <%= f.text_field :name, autofocus: true, class: 'form-control' %>
-        </div>
-
-        <div class="col-auto">
-          <%= f.label :description %>
-          <%= f.text_area :desctription, class: 'form-control' %>
-        </div>
-
-        <div class="col-auto">
-          <%= f.label :sku %>
-          <%= f.text_field :sku, class: 'form-control' %>
-        </div>
-
-        <div class="col-auto">
-          <%= f.label :image %>
-          <%= f.file_field :image, class: 'form-control mb-3' %>
-        </div>
-
-        <div class="col-auto">
-          <%= f.submit type: 'submit', class: 'btn btn-primary' %>
-        </div>
-
-      <% end %>
+      <%= render 'form', product: @product %>
     </div>
   </div>
 </div>

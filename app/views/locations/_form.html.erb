@@ -1,0 +1,15 @@
+<%= form_with(model: location) do |f| %>
+  <div class="col-auto">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+  </div>
+  <div class="col-auto">
+    <%= f.label :address %>
+    <%= f.text_field :address, class: 'form-control' %>
+  </div>
+  <div class="col-auto">
+    <%= f.label :image %>
+    <%= f.file_field :image, class: 'form-control mb-3' %>
+  </div>
+  <%= f.submit %>
+<% end %>
