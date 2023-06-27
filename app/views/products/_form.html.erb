@@ -1,4 +1,5 @@
  <%= form_with(model: product) do |f| %>
+ <%= render 'shared/errors', object: product %>
   <div class="col-auto">
     <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, class: 'form-control' %>

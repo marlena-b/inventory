@@ -20,3 +20,21 @@
     vertical-align: middle;
   }
  }
+
+ section.errors {
+  margin: 1rem 0;
+  padding: 1.5rem;
+  border-radius: 0.3rem;
+  background: #ffc;
+
+  h2 {
+    color: $red;
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+}
