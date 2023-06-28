@@ -12,6 +12,7 @@
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">SKU</th>
+      <th scope="col">Category</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -29,6 +30,7 @@
         </td>
         <td><%= link_to product.name, product %></td>
         <td><%= product.sku %></td>
+        <td><%= product.category&.name %></td>
         <td>
           <%= link_to "Edit", edit_product_path(product), class: 'button mb-3' %>
           <%= link_to "Delete", product_path(product), class: 'button mb-3', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>

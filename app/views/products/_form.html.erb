@@ -16,6 +16,10 @@
     <%= f.label :image %>
     <%= f.file_field :image, class: 'form-control mb-3' %>
   </div>
+  <div class="col-auto mb-3">
+    <%= f.label :category %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {}, class: 'form-select') %>
+  </div>
   <div class="col-auto">
     <%= f.submit type: 'submit', class: 'btn btn-primary' %>
   </div>
