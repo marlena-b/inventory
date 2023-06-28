@@ -1,0 +1,10 @@
+ <%= form_with(model: category) do |f| %>
+  <%= render 'shared/errors', object: category %>
+  <div class="col-auto mb-3">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+  </div>
+  <div class="col-auto">
+    <%= f.submit type: 'submit', class: 'btn btn-primary' %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<div class="d-flex">
+  <div class="p-2 flex-grow-1">
+    <h1>Categories</h2>
+  </div>
+  <div class="p-2">
+    <%= link_to "Add new category", new_category_path, class:"btn btn-primary" %>
+  </div>
+</div>
+<table class="table inventory-table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to category.name, category %></td>
+        <td>
+          <%= link_to "Edit", edit_category_path(category), class: 'button mb-3' %>
+          <%= link_to "Delete", category_path(category), class: 'button mb-3', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
