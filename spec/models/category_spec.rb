@@ -15,8 +15,8 @@ RSpec.describe Category, type: :model do
   end
 
   describe "deleting" do
-    subject { described_class.create!(name: "Rurki") }
-    let!(:product) { Product.create!(name: "Rurka", category: subject) }
+    subject { create(:category) }
+    let!(:product) { create(:product, category: subject) }
 
     it "nullifies associated products category_ids" do
       subject.destroy!
