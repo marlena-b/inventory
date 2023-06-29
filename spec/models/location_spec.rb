@@ -3,9 +3,7 @@ require 'rails_helper'
 RSpec.describe Location, type: :model do
   let(:too_big_image) { fixture_file_upload("spec/fixtures/cat_12mb.png", "image/png") }
   let(:text_file) { fixture_file_upload("spec/fixtures/file.txt", "txt") }
-  subject {
-    described_class.new(name: "Oslo")
-  }
+  subject { build(:location) }
 
    it "is not valid without name" do
     subject.name = nil

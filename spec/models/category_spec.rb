@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  subject {
-    described_class.new(name: "Rurki")
-  }
+  subject { build(:category) }
 
   describe "validations" do
     it "is not valid without name" do
