@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   include ImageValidation
 
   has_one_attached :image
+  has_many :stocks
 
   belongs_to :category, optional: true
 
