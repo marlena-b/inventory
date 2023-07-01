@@ -1,13 +1,12 @@
 class Product < ApplicationRecord
   include ImageValidation
 
-  has_one_attached :image
-  has_many :stocks
-
   belongs_to :category, optional: true
+  has_many :stocks, inverse_of: :product
+  has_one_attached :image
 
   validates :name, presence: true
-
   validate :acceptable_image
 
+  accepts_nested_attributes_for :stocks
 end
