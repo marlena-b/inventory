@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   include ImageValidation
 
   belongs_to :category, optional: true
-  has_many :stocks, inverse_of: :product
+  has_many :stocks, inverse_of: :product, dependent: :destroy
   has_one_attached :image
 
   validates :name, presence: true

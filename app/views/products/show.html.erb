@@ -1,11 +1,71 @@
-<div class="col-md-3 mb-4 px-5 text-center">
-  <%= @product.name %>
-  <% if @product.image.attached? %>
-    <%= image_tag @product.image, class:"img-fluid rounded mb-3" %>
-  <% end %>
-  <% @product.stocks.each do |stock| %>
-    <%= stock.location.name %>: <%= stock.quantity %>
-  <% end %>
-  <%= link_to "Edit", edit_product_path(@product), class: 'button' %>
-  <%= link_to "Delete", product_path(@product), class: 'button', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-3 px-4 text-center">
+      <% if @product.image.attached? %>
+        <%= image_tag @product.image, class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
+      <% else %>
+        <%= image_tag 'placeholder.jpeg', class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
+      <% end %>
+      <h1> <%= @product.name %> </h1>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Actions
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to "Edit", edit_product_path(@product), class:"button dropdown-item" %></li>
+          <li><%= link_to "Delete", product_path(@product), class:"button dropdown-item", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-6 px-5">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong> INFO </strong>
+          </h5>
+          <table class="table inventory-table">
+            <tbody>
+              <tr>
+                <th> Description</th>
+                <td><%= @product.description %></td>
+              </tr>
+              <tr>
+                <th>SKU </th>
+                <td><%= @product.sku %> </td>
+              </tr>
+              <tr>
+                <th>Category</th>
+                <td><%= @product.category&.name %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong> INVENTORY </strong>
+          </h5>
+          <table class="table inventory-table">
+            <thead>
+              <tr>
+                <th scope="col">Location</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @product.stocks.each do |stock| %>
+                <tr>
+                  <td>
+                    <%= stock.location.name %>
+                  </td>
+                  <td>
+                    <%= stock.quantity %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
