@@ -1,25 +1,41 @@
  <%= form_with(model: product) do |f| %>
- <%= render 'shared/errors', object: product %>
-  <div class="col-auto">
+  <%= render 'shared/errors', object: product %>
+  <div class="col-auto mb-3">
     <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, class: 'form-control' %>
   </div>
-  <div class="col-auto">
+  <div class="col-auto mb-3">
     <%= f.label :description %>
-    <%= f.text_area :desctription, class: 'form-control' %>
+    <%= f.text_area :description, class: 'form-control' %>
   </div>
-  <div class="col-auto">
+  <div class="col-auto mb-3">
     <%= f.label :sku %>
     <%= f.text_field :sku, class: 'form-control' %>
   </div>
-  <div class="col-auto">
+  <div class="col-auto mb-3">
     <%= f.label :image %>
-    <%= f.file_field :image, class: 'form-control mb-3' %>
+    <%= f.file_field :image, class: 'form-control' %>
   </div>
   <div class="col-auto mb-3">
     <%= f.label :category %>
     <%= f.collection_select(:category_id, Category.all, :id, :name, {}, class: 'form-select') %>
   </div>
+  <h3>Stocks:</h3>
+  <%= f.fields_for :stocks do |stocks_form| %>
+    <%= stocks_form.hidden_field :location_id, value: stocks_form.object.location_id %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= stocks_form.object.location.name %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          <%= stocks_form.object.location.address %>
+        </h6>
+        <%= stocks_form.label :quantity %>
+        <%= stocks_form.number_field :quantity, min: 0, class: 'form-control' %>
+      </div>
+    </div>
+  <% end %>
   <div class="col-auto">
     <%= f.submit type: 'submit', class: 'btn btn-primary' %>
   </div>

@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    Location.all.each { |location| @product.stocks.build(location: location, quantity: 0) }
   end
 
   def create
@@ -43,6 +44,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :sku, :image, :category_id)
+    params.require(:product).permit(:name, :description, :sku, :image, :category_id, stocks_attributes:[:quantity, :location_id, :id])
   end
 end
