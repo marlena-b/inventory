@@ -12,8 +12,14 @@
           Actions
         </button>
         <ul class="dropdown-menu">
-          <li><%= link_to "Edit", edit_product_path(@product), class:"button dropdown-item" %></li>
-          <li><%= link_to "Delete", product_path(@product), class:"button dropdown-item", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%></li>
+          <li><%= link_to edit_product_path(@product), class:"button dropdown-item" do %>
+              <%= icon('fa-solid', 'pen') %> Edit
+            <% end %>
+          </li>
+          <li><%= link_to product_path(@product), class:"button dropdown-item", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <%= icon('fa-solid', 'trash-can') %> Delete
+            <% end %>
+          </li>
         </ul>
       </div>
     </div>

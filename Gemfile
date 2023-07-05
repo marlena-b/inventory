@@ -74,3 +74,5 @@ gem 'bootstrap', '~> 5.3.0.alpha3'
 gem "aws-sdk-s3"
 
 gem 'faker'
+
+gem "font-awesome-sass", "~> 6.4.0"
