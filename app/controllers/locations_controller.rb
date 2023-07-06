@@ -7,7 +7,11 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_params)
-    if @location.save
+    if @location.valid?
+      ActiveRecord::Base.transaction do
+        @location.save!
+        Product.all.each { |product| Stock.create!(location: @location, product: product, quantity: 0) }
+      end
       redirect_to @location
     else
       render :new, status: :unprocessable_entity
