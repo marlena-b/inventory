@@ -1,2 +1,55 @@
-<%= @location.name %>
-<%= @location.address %>
+<div class="container">
+  <div class="row">
+    <div class="col-3 px-4 text-center">
+      <% if @location.image.attached? %>
+        <%= image_tag @location.image, class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
+      <% else %>
+        <%= image_tag 'placeholder.jpeg', class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
+      <% end %>
+      <h1> <%= @location.name %> </h1>
+      <h5> <%= @location.address %></h5>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Actions
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to edit_location_path(@location), class:"button dropdown-item" do %>
+              <%= icon('fa-solid', 'pen') %> Edit
+            <% end %>
+          </li>
+          <li><%= link_to location_path(@location), class:"button dropdown-item", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <%= icon('fa-solid', 'trash-can') %> Delete
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-6 px-5">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong> PRODUCTS </strong>
+          </h5>
+          <table class="table inventory-table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @location.stocks.each do |stock| %>
+                <tr>
+                  <td>
+                    <%= stock.product.name %>
+                  </td>
+                  <td>
+                    <%= stock.quantity %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>

@@ -9,7 +9,7 @@
 <table class="table inventory-table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col"></th>
       <th scope="col">Name</th>
       <th scope="col">SKU</th>
       <th scope="col">Category</th>
@@ -28,12 +28,17 @@
             <% end %>
           <% end %>
         </td>
-        <td><%= link_to product.name, product %></td>
+        <td><%= link_to product.name, product, class:'link-dark' %></td>
         <td><%= product.sku %></td>
         <td><%= product.category&.name %></td>
         <td>
-          <%= link_to "Edit", edit_product_path(product), class: 'button mb-3' %>
-          <%= link_to "Delete", product_path(product), class: 'button mb-3', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+          <%= link_to edit_product_path(product), class: 'button mb-3' do %>
+            <%= icon('fa-solid', 'pen') %> Edit
+          <% end %>
+          <br>
+          <%= link_to product_path(product), class: 'button mb-3 link-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>
+            <%= icon('fa-solid', 'trash-can') %> Delete
+          <% end %>
         </td>
       </tr>
     <% end %>

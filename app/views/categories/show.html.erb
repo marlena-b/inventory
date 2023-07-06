@@ -1,3 +1,50 @@
-<%= @category.name %>
-<%= link_to "Edit", edit_category_path(@category) %>
-<%= link_to "Delete", category_path(@category), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<div class="container">
+  <div class="row">
+    <div class="col-3 px-4 text-center">
+      <% if @category.image.attached? %>
+        <%= image_tag @category.image, class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
+      <% else %>
+        <%= image_tag 'placeholder.jpeg', class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
+      <% end %>
+      <h1> <%= @category.name %> </h1>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Actions
+        </button>
+        <ul class="dropdown-menu">
+          <li><%= link_to edit_category_path(@category), class:"button dropdown-item" do %>
+              <%= icon('fa-solid', 'pen') %> Edit
+            <% end %>
+          </li>
+          <li><%= link_to category_path(@category), class:"button dropdown-item", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <%= icon('fa-solid', 'trash-can') %> Delete
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-6 px-5">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong> PRODUCTS </strong>
+          </h5>
+          <table class="table inventory-table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @category.products.each do |product| %>
+                <tr>
+                  <td>
+                    <%= link_to product.name, product, class:'link-dark' %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>

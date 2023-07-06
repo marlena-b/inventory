@@ -1,5 +1,5 @@
 <%= form_with(model: location) do |f| %>
-<%= render 'shared/errors', object: location %>
+  <%= render 'shared/errors', object: location %>
   <div class="col-auto">
     <%= f.label :name %>
     <%= f.text_field :name, autofocus: true, class: 'form-control' %>
@@ -12,5 +12,7 @@
     <%= f.label :image %>
     <%= f.file_field :image, class: 'form-control mb-3' %>
   </div>
-  <%= f.submit %>
+  <div class="col-auto">
+    <%= f.submit type: 'submit', class: 'btn btn-primary' %>
+  </div>
 <% end %>

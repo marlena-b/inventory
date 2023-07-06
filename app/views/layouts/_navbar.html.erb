@@ -2,13 +2,19 @@
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
       <li class="nav-item">
-        <%= link_to 'Products', products_path, class: "nav-link" %>
+        <%= link_to products_path, class: "nav-link link-dark" do %>
+          <%= icon('fa-solid', 'dolly') %> Products
+        <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to 'Locations', locations_path, class: "nav-link" %>
+        <%= link_to locations_path, class: "nav-link link-dark" do %>
+          <%= icon('fa-solid', 'shop') %> Locations
+        <% end %>
       </li>
       <li class="nav-item">
-        <%= link_to 'Categories', categories_path, class: "nav-link" %>
+        <%= link_to categories_path, class: "nav-link link-dark" do %>
+          <%= icon('fa-solid', 'folder-open') %> Categories
+        <% end %>
       </li>
     </ul>
   </div>
