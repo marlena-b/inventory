@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :products
   resources :locations
   resources :categories
+  resources :stocks, only: :update
 end
