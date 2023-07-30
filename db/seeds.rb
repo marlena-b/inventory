@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'faker'
 
 5.times do |i|
@@ -8,7 +10,7 @@ require 'faker'
   )
 end
 
-categories =  Category.create!([{name: "Rurki"}, {name: "Stelaże"}, {name: "Stojaki"}, {name: "Śrubki"}])
+categories = Category.create!([{ name: 'Rurki' }, { name: 'Stelaże' }, { name: 'Stojaki' }, { name: 'Śrubki' }])
 
 30.times do
   Product.create!(
@@ -23,7 +25,7 @@ end
   Location.create!(
     name: Faker::Company.name,
     address: Faker::Address.full_address
-    )
+  )
 end
 
 Location.all.each do |location|

@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   before_action :authenticate_user!
 
   def new
     @product = Product.new
-    Location.all.each { |location| @product.stocks.build(location: location, quantity: 0) }
+    Location.all.each { |location| @product.stocks.build(location:, quantity: 0) }
   end
 
   def create
@@ -33,7 +35,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    @products = Product.all.order(updated_at: :desc).includes(:category, image_attachment: :blob)
   end
 
   def destroy
@@ -41,9 +43,11 @@ class ProductsController < ApplicationController
     product.destroy
     redirect_to products_url, status: :see_other
   end
+
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :sku, :image, :category_id, stocks_attributes:[:quantity, :location_id, :id])
+    params.require(:product).permit(:name, :description, :sku, :image, :category_id,
+                                    stocks_attributes: %i[quantity location_id id])
   end
 end

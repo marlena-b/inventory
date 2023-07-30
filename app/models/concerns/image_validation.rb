@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ImageValidation
   def acceptable_image
     return unless image.attached?

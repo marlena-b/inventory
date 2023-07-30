@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocationsController < ApplicationController
   before_action :authenticate_user!
 
@@ -10,7 +12,7 @@ class LocationsController < ApplicationController
     if @location.valid?
       ActiveRecord::Base.transaction do
         @location.save!
-        Product.all.each { |product| Stock.create!(location: @location, product: product, quantity: 0) }
+        Product.all.each { |product| Stock.create!(location: @location, product:, quantity: 0) }
       end
       redirect_to @location
     else
@@ -20,6 +22,7 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
+    @stocks =  @location.stocks.ordered_by_product_name
   end
 
   def index

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Location < ApplicationRecord
   include ImageValidation
 
@@ -7,5 +9,4 @@ class Location < ApplicationRecord
   validates :name, presence: true
 
   validate :acceptable_image
-
 end

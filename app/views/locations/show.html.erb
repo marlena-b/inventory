@@ -38,7 +38,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @location.stocks.ordered_by_product_name.each do |stock| %>
+              <% @stocks.each do |stock| %>
                 <tr>
                   <td>
                     <%= stock.product.name %>
@@ -59,9 +59,6 @@
                           </div>
                           <%= form_with(model: stock) do |f| %>
                             <div class="modal-body">
-                              <%= f.hidden_field :location_id, value: stock.location.id %>
-                              <%= f.hidden_field :product_id, value: stock.product.id %>
-                              <%= f.hidden_field :stock, value: stock.id %>
                               <%= f.label :quantity %>
                               <%= f.number_field :quantity, min: 0, class: 'form-control' %>
                             </div>
