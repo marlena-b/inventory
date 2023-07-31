@@ -30,7 +30,7 @@
           <% end %>
         </td>
         <td><%= link_to product.name, product, class:'link-dark' %></td>
-        <td><%= total_quantity_of_products(product) %>
+        <td><%= product.total_quantity %>
         <td><%= product.sku %></td>
         <td><%= product.category&.name %></td>
         <td>
