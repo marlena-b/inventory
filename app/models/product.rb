@@ -11,4 +11,8 @@ class Product < ApplicationRecord
   validate :acceptable_image
 
   accepts_nested_attributes_for :stocks
+
+  def total_quantity
+    stocks.sum { |stock| stock.quantity }
+  end
 end

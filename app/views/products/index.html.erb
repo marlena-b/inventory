@@ -11,6 +11,7 @@
     <tr>
       <th scope="col"></th>
       <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
       <th scope="col">SKU</th>
       <th scope="col">Category</th>
       <th scope="col">Actions</th>
@@ -29,6 +30,7 @@
           <% end %>
         </td>
         <td><%= link_to product.name, product, class:'link-dark' %></td>
+        <td><%= product.total_quantity %>
         <td><%= product.sku %></td>
         <td><%= product.category&.name %></td>
         <td>

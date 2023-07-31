@@ -35,7 +35,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all.order(updated_at: :desc).includes(:category, image_attachment: :blob)
+    @products = Product.all.order(updated_at: :desc).includes(:category, :stocks, image_attachment: :blob)
   end
 
   def destroy
