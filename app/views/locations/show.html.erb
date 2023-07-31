@@ -4,7 +4,7 @@
       <% if @location.image.attached? %>
         <%= image_tag @location.image, class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
       <% else %>
-        <%= image_tag 'placeholder.jpeg', class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
+        <%= image_tag 'placeholder-location.png', class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
       <% end %>
       <h1> <%= @location.name %> </h1>
       <h5> <%= @location.address %></h5>

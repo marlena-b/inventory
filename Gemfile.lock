@@ -94,6 +94,7 @@ GEM
       sassc-rails (>= 2.0.0)
     builder (3.2.4)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
@@ -106,6 +107,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.2)
+      rails
     erubi (1.12.0)
     execjs (2.8.1)
     factory_bot (6.2.1)
@@ -155,7 +158,11 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.2-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.15.2-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.5.3)
@@ -194,6 +201,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.14.1)
+      connection_pool
     reline (0.3.5)
       io-console (~> 0.5)
     responders (3.1.0)
@@ -255,7 +266,9 @@ GEM
     zeitwerk (2.6.8)
 
 PLATFORMS
+  aarch64-linux
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-s3
@@ -263,6 +276,7 @@ DEPENDENCIES
   bootstrap (~> 5.3.0.alpha3)
   debug
   devise (~> 4.9)
+  dockerfile-rails (>= 1.5)
   factory_bot_rails
   faker
   font-awesome-sass (~> 6.4.0)
@@ -271,6 +285,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
+  redis (~> 5.0)
   rspec-rails (~> 6.0.0)
   sprockets-rails
   stimulus-rails

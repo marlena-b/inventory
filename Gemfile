@@ -77,3 +77,7 @@ gem 'aws-sdk-s3'
 gem 'faker'
 
 gem 'font-awesome-sass', '~> 6.4.0'
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+gem "redis", "~> 5.0"
