@@ -18,7 +18,7 @@
   </div>
   <div class="col-auto mb-3">
     <%= f.label :category %>
-    <%= f.collection_select(:category_id, Category.all, :id, :name, {}, class: 'form-select') %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "No category"}, class: 'form-select') %>
   </div>
   <h3>Stocks:</h3>
   <%= f.fields_for :stocks do |stocks_form| %>
