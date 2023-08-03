@@ -31,18 +31,22 @@
         </td>
         <td><%= link_to product.name, product, class:'link-dark' %></td>
         <td><%= product.total_quantity %>
-        <td><%= product.sku %></td>
-        <td><%= product.category&.name %></td>
-        <td>
-          <%= link_to edit_product_path(product), class: 'button mb-3' do %>
-            <%= icon('fa-solid', 'pen') %> Edit
-          <% end %>
-          <br>
-          <%= link_to product_path(product), class: 'button mb-3 link-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>
-            <%= icon('fa-solid', 'trash-can') %> Delete
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <td><%= product.sku %></td>
+          <td><%= product.category&.name %></td>
+          <td>
+            <%= link_to edit_product_path(product), class: 'button mb-3' do %>
+              <%= icon('fa-solid', 'pen') %> Edit
+            <% end %>
+            <br>
+            <%= link_to product_path(product), class: 'button mb-3 link-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  do %>
+              <%= icon('fa-solid', 'trash-can') %> Delete
+            <% end %>
+            <br>
+            <%= link_to edit_transfer_product_path(product), class: 'button mb-3' do %>
+              <%= icon('fa-solid', 'truck-front') %> Transfer
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

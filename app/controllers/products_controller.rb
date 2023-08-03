@@ -44,6 +44,16 @@ class ProductsController < ApplicationController
     redirect_to products_url, status: :see_other
   end
 
+  def edit_transfer
+    @product = Product.find(params[:id])
+  end
+
+  def transfer
+    @product = Product.find(params[:id])
+    TransferProductFromStockService.new(product: @product, location: params[:stocks][:location_id], second_location: params[:stocks][:second_location_id], quantity: params[:stocks][:quantity]).call
+    redirect_to @product
+  end
+
   private
 
   def product_params
