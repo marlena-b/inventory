@@ -2,12 +2,12 @@
 <%= form_with url: transfer_product_url, method: :patch do |f| %>
   <%= fields_for :stocks do |stock| %>
     <div class="col-auto mb-3">
-      <%= stock.label :from%>
-      <%= stock.collection_select(:location_id, Location.all, :id, :name, {}, class: 'form-select') %>
+      <%= stock.label :source_location %>
+      <%= stock.collection_select(:source_location_id, Location.all, :id, :name, {}, class: 'form-select') %>
     </div>
     <div class="col-auto mb-3">
-      <%= stock.label :to %>
-      <%= stock.collection_select(:second_location_id, Location.all, :id, :name, {}, class: 'form-select') %>
+      <%= stock.label :destination_location %>
+      <%= stock.collection_select(:destination_location_id, Location.all, :id, :name, {}, class: 'form-select') %>
     </div>
     <div class="col-auto mb-3">
       <%= stock.label :quantity %>
