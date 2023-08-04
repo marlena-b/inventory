@@ -8,12 +8,12 @@ class TransferStockService
 
   def call
     ActiveRecord::Base.transaction do
-      @stock_1 = Stock.find_by(location: @source_location, product: @product)
-      @stock_1.quantity -=  @quantity
-      @stock_1.save
-      @stock_2 = Stock.find_by(location: @destination_location, product: @product)
-      @stock_2.quantity += @quantity
-      @stock_2.save
+      stock_1 = @product.stocks.find_by!(location: @source_location)
+      stock_1.quantity -=  @quantity
+      stock_1.save
+      stock_2 = @product.stocks.find_by!(location: @destination_location)
+      stock_2.quantity += @quantity
+      stock_2.save
     end
   end
 end

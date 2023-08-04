@@ -15,9 +15,9 @@ class StocksController < ApplicationController
   end
 
   def transfer
-    @product = Product.find(params[:id])
-    TransferStockService.new(product: @product, source_location: params[:stocks][:source_location_id], destination_location: params[:stocks][:destination_location_id], quantity: params[:stocks][:quantity]).call
-    redirect_to @product
+    product = Product.find(params[:id])
+    TransferStockService.new(product: product, source_location: params[:stocks][:source_location_id], destination_location: params[:stocks][:destination_location_id], quantity: params[:stocks][:quantity]).call
+    redirect_to product
   end
 
   private
