@@ -13,6 +13,6 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :stocks
 
   def total_quantity
-    stocks.sum { |stock| stock.quantity }
+    stocks.sum(&:quantity)
   end
 end

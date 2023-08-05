@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TransferStockService
   def initialize(product:, source_location:, destination_location:, quantity:)
     @product = product
@@ -8,12 +10,12 @@ class TransferStockService
 
   def call
     ActiveRecord::Base.transaction do
-      stock_1 = @product.stocks.find_by!(location: @source_location)
-      stock_1.quantity -=  @quantity
-      stock_1.save
-      stock_2 = @product.stocks.find_by!(location: @destination_location)
-      stock_2.quantity += @quantity
-      stock_2.save
+      stock1 = @product.stocks.find_by!(location: @source_location)
+      stock1.quantity -= @quantity
+      stock1.save
+      stock2 = @product.stocks.find_by!(location: @destination_location)
+      stock2.quantity += @quantity
+      stock2.save
     end
   end
 end

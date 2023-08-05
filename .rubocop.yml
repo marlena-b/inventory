@@ -1,0 +1,14 @@
+require: rubocop-rails
+Style/Documentation:
+  Enabled: false
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+Rails/I18nLocaleTexts:
+  Enabled: false
+Rails/BulkChangeTable:
+  Enabled: false
+Rails/NotNullColumn:
+  Enabled: false
+Metrics/BlockLength:
+  AllowedMethods: ['describe', 'context']
