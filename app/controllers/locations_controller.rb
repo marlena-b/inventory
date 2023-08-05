@@ -3,8 +3,21 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @locations = Location.all
+  end
+
+  def show
+    @location = Location.find(params[:id])
+    @stocks = @location.stocks.ordered_by_product_name
+  end
+
   def new
     @location = Location.new
+  end
+
+  def edit
+    @location = Location.find(params[:id])
   end
 
   def create
@@ -18,19 +31,6 @@ class LocationsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def show
-    @location = Location.find(params[:id])
-    @stocks =  @location.stocks.ordered_by_product_name
-  end
-
-  def index
-    @locations = Location.all
-  end
-
-  def edit
-    @location = Location.find(params[:id])
   end
 
   def update

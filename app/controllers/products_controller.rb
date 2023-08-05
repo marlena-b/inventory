@@ -3,9 +3,21 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @products = Product.all.order(updated_at: :desc).includes(:category, :stocks, image_attachment: :blob)
+  end
+
+  def show
+    @product = Product.find(params[:id])
+  end
+
   def new
     @product = Product.new
     Location.all.each { |location| @product.stocks.build(location:, quantity: 0) }
+  end
+
+  def edit
+    @product = Product.find(params[:id])
   end
 
   def create
@@ -17,10 +29,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-    @product = Product.find(params[:id])
-  end
-
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
@@ -28,14 +36,6 @@ class ProductsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  def show
-    @product = Product.find(params[:id])
-  end
-
-  def index
-    @products = Product.all.order(updated_at: :desc).includes(:category, :stocks, image_attachment: :blob)
   end
 
   def destroy

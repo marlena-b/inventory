@@ -3,8 +3,20 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @categories = Category.all
+  end
+
+  def show
+    @category = Category.find(params[:id])
+  end
+
   def new
     @category = Category.new
+  end
+
+  def edit
+    @category = Category.find(params[:id])
   end
 
   def create
@@ -16,10 +28,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def edit
-    @category = Category.find(params[:id])
-  end
-
   def update
     @category = Category.find(params[:id])
     if @category.update(category_params)
@@ -27,14 +35,6 @@ class CategoriesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
-  end
-
-  def show
-    @category = Category.find(params[:id])
-  end
-
-  def index
-    @categories = Category.all
   end
 
   def destroy

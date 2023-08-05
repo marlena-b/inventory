@@ -10,6 +10,21 @@ class StocksController < ApplicationController
     redirect_back_or_to @stock.product
   end
 
+  def edit_transfer
+    @product = Product.find(params[:id])
+  end
+
+  def transfer
+    product = Product.find(params[:id])
+    TransferStockService.new(
+      product:,
+      source_location: params[:stocks][:source_location_id],
+      destination_location: params[:stocks][:destination_location_id],
+      quantity: params[:stocks][:quantity]
+    ).call
+    redirect_to product
+  end
+
   private
 
   def stock_params
