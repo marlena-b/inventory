@@ -10,10 +10,6 @@ class StocksController < ApplicationController
     redirect_back_or_to @stock.product
   end
 
-  def edit_transfer
-    @product = Product.find(params[:id])
-  end
-
   def transfer
     product = Product.find(params[:id])
     TransferStockService.new(

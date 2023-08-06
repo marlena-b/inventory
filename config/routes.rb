@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   root to: 'users#show'
 
   resources :products
-  get '/products/:id/transfer', to: 'stocks#edit_transfer', as: 'edit_transfer_product'
   patch '/products/:id/transfer', to: 'stocks#transfer', as: 'transfer_product'
   resources :locations
   resources :categories

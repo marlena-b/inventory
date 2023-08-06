@@ -1,3 +1,4 @@
+<%= render 'shared/stock_transfer_modal' %>
 <div class="container">
   <div class="row">
     <div class="col-3 px-4 text-center">
@@ -19,10 +20,12 @@
           <li><%= link_to product_path(@product), class:"button dropdown-item", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
               <%= icon('fa-solid', 'trash-can') %> Delete
             <% end %>
-          </li><%= link_to transfer_product_path(@product), class:"button dropdown-item" do %>
-              <%= icon('fa-solid', 'truck-front') %> Transfer
-            <% end %>
+          </li>
           <li>
+            <!-- Button trigger modal -->
+            <a href="#" class="button dropdown-item" data-bs-toggle="modal" data-bs-target="#stockTransferModal">
+              <%= icon('fa-solid', 'truck-front') %> Transfer
+            </a>
           </li>
         </ul>
       </div>
@@ -104,3 +107,5 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
