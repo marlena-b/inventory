@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal fade" id="stockTransferModal" tabindex="-1" aria-labelledby="stockTransferModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="stockTransferModalLabel">Transfer Stock</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with url: transfer_product_url, method: :patch do |f| %>
+        <%= fields_for :stocks do |stock| %>
+        <div class="modal-body">
+          <div class="col-auto mb-3">
+            <%= stock.label :source_location %>
+            <%= stock.collection_select(:source_location_id, Location.all, :id, :name, {}, class: 'form-select') %>
+          </div>
+          <div class="col-auto mb-3">
+            <%= stock.label :destination_location %>
+            <%= stock.collection_select(:destination_location_id, Location.all, :id, :name, {}, class: 'form-select') %>
+          </div>
+          <div class="col-auto mb-3">
+            <%= stock.label :quantity %>
+            <%= stock.number_field :quantity, class: 'form-control' %>
+          </div>
+        </div>
+        <% end %>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= f.submit "Save changes", type:"submit", class:"btn btn-primary"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
