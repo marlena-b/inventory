@@ -1,0 +1,31 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal<%= stock.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Set quantity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with(model: stock) do |f| %>
+        <div class="modal-body">
+          <div class="col-auto mb-3">
+            <%= f.label :quantity %>
+            <%= f.number_field :quantity, min: 0, class: 'form-control' %>
+          </div>
+           <div class="col-auto mb-3">
+            <%= f.label :reason %>
+            <%= f.select :reason, StockAdjustment::REASONS, {}, class: 'form-select' %>
+          </div>
+           <div class="col-auto mb-3">
+            <%= f.label :note %>
+            <%= f.text_field :note, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= f.submit "Save changes", type:"submit", class:"btn btn-primary"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
