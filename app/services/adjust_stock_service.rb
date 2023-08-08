@@ -26,7 +26,7 @@ class AdjustStockService
       user: @user,
       location: @stock.location,
       product: @stock.product,
-      quantity: @quantity_diff,
+      quantity_diff: @quantity_diff,
       quantity_after_adjustment: @quantity_after_adjustment,
       reason: @reason,
       note: @note

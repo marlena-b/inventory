@@ -22,7 +22,7 @@ RSpec.describe AdjustStockService do
 
       stock_adjustment = StockAdjustment.find_by!(product: stock.product, location: stock.location)
 
-      expect(stock_adjustment.quantity).to eq(60)
+      expect(stock_adjustment.quantity_diff).to eq(60)
       expect(stock_adjustment.quantity_after_adjustment).to eq(100)
       expect(stock_adjustment.reason).to eq('new stock')
       expect(stock_adjustment.note).to eq(nil)
