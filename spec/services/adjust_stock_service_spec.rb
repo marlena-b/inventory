@@ -27,5 +27,15 @@ RSpec.describe AdjustStockService do
       expect(stock_adjustment.reason).to eq('new stock')
       expect(stock_adjustment.note).to eq(nil)
     end
+
+    context 'when quantity is not changed' do
+      it 'does not create Stock Adjustment' do
+        AdjustStockService.new(
+          user:, stock:, reason: 'new stock', quantity_after_adjustment: stock.quantity
+        ).call
+
+        expect(StockAdjustment.exists?).to be_falsy
+      end
+    end
   end
 end

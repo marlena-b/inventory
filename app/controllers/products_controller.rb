@@ -57,12 +57,9 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :description, :sku, :image, :category_id)
   end
 
-  # rubocop:disable Metrics/AbcSize,
   def adjust_stock(product, reason)
     params[:product][:stocks_attributes].each_value do |stock_attribute|
       stock = product.stocks.detect { |s| s.location_id == stock_attribute[:location_id].to_i }
-      next unless stock_attribute[:quantity].to_i != stock.quantity
-
       AdjustStockService.new(
         user: current_user,
         stock:,
@@ -71,5 +68,4 @@ class ProductsController < ApplicationController
       ).call
     end
   end
-  # rubocop:enable Metrics/AbcSize,
 end

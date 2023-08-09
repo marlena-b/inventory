@@ -6,7 +6,6 @@ class StocksController < ApplicationController
   # rubocop:disable Metrics/AbcSize
   def update
     stock = Stock.find(params[:id])
-
     AdjustStockService.new(
       user: current_user,
       stock:,
@@ -14,7 +13,6 @@ class StocksController < ApplicationController
       reason: params[:stock][:reason],
       note: params[:stock][:note].presence
     ).call
-
     redirect_back_or_to stock.product
   end
 

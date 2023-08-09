@@ -11,6 +11,8 @@ class AdjustStockService
   end
 
   def call
+    return if @quantity_diff.zero?
+
     ActiveRecord::Base.transaction do
       update_stock_quantity
       create_stock_adjustment
