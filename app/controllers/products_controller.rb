@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
     Location.all.each { |location| @product.stocks.build(location:, quantity: 0) }
     ActiveRecord::Base.transaction do
       if @product.save
-        adjust_stock(@product, "new stock")
+        adjust_stock(@product, 'new stock')
         redirect_to @product
       else
         render :new, status: :unprocessable_entity
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     ActiveRecord::Base.transaction do
       if @product.update(product_params)
-        adjust_stock(@product, "adjustment")
+        adjust_stock(@product, 'adjustment')
         redirect_to @product
       else
         render :edit, status: :unprocessable_entity
@@ -57,16 +57,19 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :description, :sku, :image, :category_id)
   end
 
+  # rubocop:disable Metrics/AbcSize,
   def adjust_stock(product, reason)
-    params[:product][:stocks_attributes].values.each do |stock_attribute|
-      stock = product.stocks.detect { |stock| stock.location_id == stock_attribute[:location_id].to_i }
-      if stock_attribute[:quantity].to_i != stock.quantity
-        AdjustStockService.new(
-          user: current_user,
-          stock: stock,
-          quantity_after_adjustment: stock_attribute[:quantity].to_i,
-          reason: reason).call
-      end
+    params[:product][:stocks_attributes].each_value do |stock_attribute|
+      stock = product.stocks.detect { |s| s.location_id == stock_attribute[:location_id].to_i }
+      next unless stock_attribute[:quantity].to_i != stock.quantity
+
+      AdjustStockService.new(
+        user: current_user,
+        stock:,
+        quantity_after_adjustment: stock_attribute[:quantity].to_i,
+        reason:
+      ).call
     end
   end
+  # rubocop:enable Metrics/AbcSize,
 end
