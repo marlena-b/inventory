@@ -22,19 +22,26 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    if @product.save
-      redirect_to @product
-    else
-      render :new, status: :unprocessable_entity
+    Location.all.each { |location| @product.stocks.build(location:, quantity: 0) }
+    ActiveRecord::Base.transaction do
+      if @product.save
+        adjust_stock(@product, "new stock")
+        redirect_to @product
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
   def update
     @product = Product.find(params[:id])
-    if @product.update(product_params)
-      redirect_to @product
-    else
-      render :edit, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      if @product.update(product_params)
+        adjust_stock(@product, "adjustment")
+        redirect_to @product
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
@@ -47,7 +54,19 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :sku, :image, :category_id,
-                                    stocks_attributes: %i[quantity location_id id])
+    params.require(:product).permit(:name, :description, :sku, :image, :category_id)
+  end
+
+  def adjust_stock(product, reason)
+    params[:product][:stocks_attributes].values.each do |stock_attribute|
+      stock = product.stocks.detect { |stock| stock.location_id == stock_attribute[:location_id].to_i }
+      if stock_attribute[:quantity].to_i != stock.quantity
+        AdjustStockService.new(
+          user: current_user,
+          stock: stock,
+          quantity_after_adjustment: stock_attribute[:quantity].to_i,
+          reason: reason).call
+      end
+    end
   end
 end
