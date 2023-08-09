@@ -25,7 +25,8 @@ class StocksController < ApplicationController
       product:,
       source_location: params[:stocks][:source_location_id],
       destination_location: params[:stocks][:destination_location_id],
-      quantity: params[:stocks][:quantity]
+      quantity: params[:stocks][:quantity],
+      current_user: current_user
     ).call
     redirect_to product
   end
