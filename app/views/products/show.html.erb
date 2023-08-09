@@ -1,3 +1,7 @@
+<% @product.stocks.each do |stock| %>
+  <%= render 'shared/adjust_stock_modal', stock: stock %>
+<% end %>
+
 <%= render 'shared/stock_transfer_modal' %>
 <div class="container">
   <div class="row">
@@ -78,7 +82,6 @@
                       <%= icon('fa-solid', 'pen') %>
                     </button>
                   </td>
-                  <%= render 'shared/adjust_stock_modal', stock: stock %>
                 </tr>
               <% end %>
             </tbody>
