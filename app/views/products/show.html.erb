@@ -104,13 +104,13 @@
               </tr>
             </thead>
             <tbody>
-              <% @product.stock_adjustments.each do |stock_adjustment| %>
+              <% @stock_adjustments.each do |stock_adjustment| %>
                 <tr data-bs-toggle="modal" data-bs-target="#stockAdjustmentModal<%= stock_adjustment.id%>" style="cursor:pointer">
                   <td>
                     <%= stock_adjustment.location.name %>
                   </td>
                   <td>
-                    <%= stock_adjustment.quantity_diff %>
+                    <%= format_quantity_adjustment(stock_adjustment.quantity_diff) %>
                   </td>
                   <td>
                     <%= stock_adjustment.reason %>
@@ -119,6 +119,7 @@
               <% end %>
             </tbody>
           </table>
+          <%= paginate @stock_adjustments, theme: 'bootstrap-5', pagination_class: "pagination justify-content-end" %>
         </div>
       </div>
     </div>

@@ -73,6 +73,8 @@ end
 gem 'devise', '~> 4.9'
 
 gem 'bootstrap', '~> 5.3.0.alpha3'
+gem 'kaminari'
+ gem 'bootstrap5-kaminari-views'
 
 gem 'aws-sdk-s3'
 
