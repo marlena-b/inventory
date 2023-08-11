@@ -1,0 +1,42 @@
+<!-- Modal -->
+<div class="modal fade" id="stockAdjustmentModal<%= stock_adjustment.id %>" tabindex="-1" aria-labelledby="stockAdjustmentModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Stock history details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <table class="table inventory-table">
+        <tbody>
+          <tr>
+            <th> Date </th>
+            <td> <%= stock_adjustment.created_at.strftime("%d %B %Y %I:%M:%S") %></td>
+          </tr>
+          <tr>
+            <th> User</th>
+            <td> <%= stock_adjustment.user.name %></td>
+          </tr>
+          <tr>
+            <th>Location </th>
+            <td> <%= stock_adjustment.location.name %></td>
+          </tr>
+          <tr>
+            <th>Quantity difference</th>
+            <td><%= stock_adjustment.quantity_diff %></td>
+          </tr>
+          <th>Quantity after adjustment</th>
+          <td> <%= stock_adjustment.quantity_after_adjustment %></td>
+        </tr>
+        <th>Reason</th>
+        <td> <%= stock_adjustment.reason %></td>
+      </tr>
+      <% unless stock_adjustment.note.nil? %>
+        <th>Note</th>
+        <td> <%= stock_adjustment.note %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>

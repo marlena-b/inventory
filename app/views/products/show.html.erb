@@ -1,8 +1,10 @@
 <% @product.stocks.each do |stock| %>
   <%= render 'shared/adjust_stock_modal', stock: stock %>
 <% end %>
-
 <%= render 'shared/stock_transfer_modal' %>
+<% @product.stock_adjustments.each do |stock_adjustment| %>
+  <%= render 'shared/stock_adjustment_modal', stock_adjustment: stock_adjustment %>
+<% end %>
 <div class="container">
   <div class="row">
     <div class="col-3 px-4 text-center">
@@ -86,6 +88,38 @@
               <% end %>
             </tbody>
           </table>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <strong> STOCK HISTORY</strong>
+          </h5>
+          <table class="table table-hover inventory-table">
+            <thead>
+              <tr>
+                <th scope="col">Location</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @stock_adjustments.each do |stock_adjustment| %>
+                <tr data-bs-toggle="modal" data-bs-target="#stockAdjustmentModal<%= stock_adjustment.id%>" style="cursor:pointer">
+                  <td>
+                    <%= stock_adjustment.location.name %>
+                  </td>
+                  <td>
+                    <%= format_quantity_adjustment(stock_adjustment.quantity_diff) %>
+                  </td>
+                  <td>
+                    <%= stock_adjustment.reason %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @stock_adjustments, theme: 'bootstrap-5', pagination_class: "pagination justify-content-end" %>
         </div>
       </div>
     </div>
