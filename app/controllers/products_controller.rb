@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @products = Product.all.order(updated_at: :desc).includes(:category, :stocks, image_attachment: :blob).page(params[:page]).per(10)
+    @products = Product.all.order(updated_at: :desc).includes(:category, :stocks,
+                                                              image_attachment: :blob).page(params[:page]).per(10)
   end
 
   def show
