@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @stock_adjustments = @product.stock_adjustments.page(params[:page]).per(10)
+    @stock_adjustments = @product.stock_adjustments.page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def new
