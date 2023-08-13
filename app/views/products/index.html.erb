@@ -11,7 +11,7 @@
     <tr>
       <th scope="col"></th>
       <th scope="col">Name</th>
-      <th scope="col">Quantity</th>
+      <th scope="col">Total Quantity</th>
       <th scope="col">SKU</th>
       <th scope="col">Category</th>
       <th scope="col">Actions</th>
@@ -30,7 +30,16 @@
           <% end %>
         </td>
         <td><%= link_to product.name, product, class:'link-dark' %></td>
-        <td><%= product.total_quantity %></td>
+        <td>
+          <div class='row'>
+            <div class='col-2'>
+              <%= product.total_quantity %>
+            </div>
+            <div class='col-auto'>
+              <%= stock_warnings(product) %>
+            </div>
+          </div>
+        </td>
         <td><%= product.sku %></td>
         <td><%= product.category&.name %></td>
         <td>
@@ -46,4 +55,4 @@
     <% end %>
   </tbody>
 </table>
- <%= paginate @products, theme: 'bootstrap-5', pagination_class: "pagination justify-content-end" %>
+<%= paginate @products, theme: 'bootstrap-5', pagination_class: "pagination justify-content-end" %>

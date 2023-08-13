@@ -12,3 +12,5 @@ Rails/NotNullColumn:
   Enabled: false
 Metrics/BlockLength:
   AllowedMethods: ['describe', 'context']
+Rails/OutputSafety:
+  Enabled: false

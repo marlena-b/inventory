@@ -7,4 +7,10 @@ class Stock < ApplicationRecord
   validates :quantity, presence: true
 
   scope :ordered_by_product_name, -> { includes(:product).order('products.name') }
+
+  def low_stock?
+    return false if low_level.blank?
+
+    quantity <= low_level
+  end
 end
