@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class FindProducts
   def initialize(params)
-   @search_term = params[:search_term]
-   @category = params[:category]
+    @search_term = params[:search_term]
+    @category = params[:category]
   end
 
   def call
@@ -15,13 +17,13 @@ class FindProducts
   private
 
   def apply_search(query)
-    return query unless @search_term
+    return query if @search_term.blank?
 
     query.where('name ILIKE :term OR sku ILIKE :term', term: "%#{@search_term}%")
   end
 
   def by_category(query)
-    return query unless @category
+    return query if @category.blank?
 
     query.where(category: @category)
   end
