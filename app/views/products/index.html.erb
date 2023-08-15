@@ -6,6 +6,22 @@
     <%= link_to "Add new product", new_product_path, class:"btn btn-primary" %>
   </div>
 </div>
+
+<div class="px-4 mb-5 my-5 ">
+  <div class="col-lg-7 mx-auto mt-3">
+    <%= form_with(url: products_path, method: :get, class: "row") do |form| %>
+      <div class="col-sm-7">
+       <%= form.text_field :search_term, class: "form-control", placeholder: "Search product..", value: params[:search_term] %>
+      </div>
+        <div class="col-sm-3">
+      <%= form.collection_select :category, Category.all, :id, :name, {include_blank: "Category", selected: params[:category]}, {class:"form-select mb-3"} %>
+      </div>
+      <div class="col-auto">
+      <%= form.submit "Search", class: "btn btn-outline-secondary mb-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 <table class="table inventory-table">
   <thead>
     <tr>
