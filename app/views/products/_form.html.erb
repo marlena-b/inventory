@@ -32,13 +32,13 @@
           <%= stocks_form.object.location.address %>
         </h6>
         <div class="row">
-          <div class="col-6">
+          <div class="col-md-6">
             <%= stocks_form.label :quantity %>
-            <%= stocks_form.number_field :quantity, min: 0, class: 'form-control' %>
+            <%= stocks_form.number_field :quantity, min: 0, class: 'form-control', inputmode: 'numeric' %>
           </div>
-          <div class='col-6'>
+          <div class='col-md-6'>
             <%= stocks_form.label :low_level %>
-            <%= stocks_form.number_field :low_level, min: 0, class: 'form-control' %>
+            <%= stocks_form.number_field :low_level, min: 0, class: 'form-control', inputmode: 'numeric' %>
             <div class="form-text">
               Item will be highlighted if quantity is at or below this level.
             </div>
