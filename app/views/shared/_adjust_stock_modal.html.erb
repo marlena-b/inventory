@@ -10,7 +10,7 @@
         <div class="modal-body">
           <div class="col-auto mb-3">
             <%= f.label :quantity %>
-            <%= f.number_field :quantity, min: 0, class: 'form-control' %>
+            <%= f.number_field :quantity, min: 0, class: 'form-control', inputmode: 'numeric' %>
           </div>
            <div class="col-auto mb-3">
             <%= f.label :reason %>

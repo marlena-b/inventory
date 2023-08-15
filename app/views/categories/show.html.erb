@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-3 px-4 text-center">
+    <div class="col-md-3 px-md-4 mb-3 text-center">
       <% if @category.image.attached? %>
         <%= image_tag @category.image, class:'rounded', width: 150, height: 150, style: "object-fit: cover" %>
       <% else %>
@@ -23,7 +23,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-6 px-5">
+    <div class="col-md-6 px-md-5">
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">
