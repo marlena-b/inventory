@@ -21,9 +21,15 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
     @product = Product.new(product_params)
-    Location.all.each { |location| @product.stocks.build(location:, quantity: 0) }
+    Location.all.each do |location|
+      stock_attrs = params[:product][:stocks_attributes].values.detect do |stock|
+        stock[:location_id].to_i == location.id
+      end
+      @product.stocks.build(location:, quantity: 0, low_level: stock_attrs[:low_level])
+    end
     ActiveRecord::Base.transaction do
       if @product.save
         adjust_stock(@product, 'new stock')
@@ -36,6 +42,12 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
+    @product.stocks.each do |stock|
+      stock_attrs = params[:product][:stocks_attributes].values.detect do |attrs|
+        attrs[:location_id].to_i == stock.location_id
+      end
+      stock.low_level = stock_attrs[:low_level]
+    end
     ActiveRecord::Base.transaction do
       if @product.update(product_params)
         adjust_stock(@product, 'adjustment')
@@ -46,6 +58,7 @@ class ProductsController < ApplicationController
     end
   end
 
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
   def destroy
     product = Product.find(params[:id])
     product.destroy
