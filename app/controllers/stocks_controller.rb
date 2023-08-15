@@ -10,7 +10,6 @@ class StocksController < ApplicationController
       user: current_user,
       stock:,
       quantity_after_adjustment: params[:stock][:quantity],
-      low_level: params[:stock][:low_level],
       reason: params[:stock][:reason],
       note: params[:stock][:note].presence
     ).call
