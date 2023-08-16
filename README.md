@@ -11,11 +11,13 @@ Visit https://inventory-mb.fly.dev/ to see live preview of the app.
 
 * **Adding and Managing Products:** Create, update, and delete products within your inventory system.
 
+* **Managing Multiple Warehouses**: Manage your inventory in multiple locations. This feature enables you to add new warehouses, update their details, or remove them as needed.
+  
 * **Categorizing Products:** Categorize your products to organize your inventory better and find products more efficiently.
 
-* **Managing Multiple Warehouses**: Manage your inventory in multiple locations. This feature enables you to add new warehouses, update their details, or remove them as needed.
+* **Tracking and Managing Stock:** Keep track of the stock available at each warehouse and access a full history of stock movements.
 
-* **Tracking and Managing Stock:** Keep track of the stock available at each warehouse. Full history of stock movements coming soon.
+* **🆕 Low Stock Levels:** Customize and define low stock levels for individual products within your inventory system. This feature allows you to easily identify and monitor products that are nearing depletion, enabling timely restocking.
 
 * **Transferring Stock between Locations:** Easily transfer stock between different locations. This feature handles the underlying data changes and updates your inventory accordingly.
 
