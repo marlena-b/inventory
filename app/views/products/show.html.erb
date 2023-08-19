@@ -69,7 +69,9 @@
             <thead>
               <tr>
                 <th scope="col">Location</th>
+                <th scope="col">Low level</th>
                 <th scope="col">Quantity</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -78,8 +80,17 @@
                   <td>
                     <%= stock.location.name %>
                   </td>
-                  <td style="text-align: right">
-                    <%= stock.quantity %>
+                  <td>
+                    <%= stock.low_level %>
+                  </td>
+                  <td>
+                    <% if stock.low_stock? %>
+                      <span class="badge rounded-pill text-bg-warning"><%= stock.quantity %></span>
+                    <% else %>
+                      <%= stock.quantity %>
+                    <% end %>
+                  </td>
+                  <td style="text-align:right">
                     <button type="button" class="btn btn-outline-primary btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal<%= stock.id %>">
                       <%= icon('fa-solid', 'pen') %>
                     </button>
