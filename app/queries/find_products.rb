@@ -3,7 +3,7 @@
 class FindProducts
   def initialize(params)
     @search_term = params[:search_term]
-    @category = params[:category]
+    @category_id = params[:category_id]
   end
 
   def call
@@ -23,8 +23,8 @@ class FindProducts
   end
 
   def by_category(query)
-    return query if @category.blank?
+    return query if @category_id.blank?
 
-    query.where(category: @category)
+    query.where(category: @category_id)
   end
 end
