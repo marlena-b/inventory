@@ -14,7 +14,7 @@
         <%= form.text_field :search_term, class: "form-control", placeholder: "Search products...", value: params[:search_term] %>
       </div>
       <div class="col-lg-3">
-        <%= form.collection_select :category, Category.all, :id, :name, {include_blank: "All categories", selected: params[:category]}, {class:"form-select mb-3"} %>
+        <%= form.collection_select :category_id, Category.all, :id, :name, {include_blank: "All categories", selected: params[:category_id]}, {class:"form-select mb-3"} %>
       </div>
       <div class="col-md-2">
       <%= form.submit "Search", class: "btn btn-outline-secondary mb-3" %>
