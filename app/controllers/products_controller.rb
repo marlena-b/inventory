@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
-  require "rqrcode"
+  require 'rqrcode'
 
   before_action :authenticate_user!
 
@@ -12,22 +12,8 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @stock_adjustments = @product.stock_adjustments.page(params[:page]).per(10).order(created_at: :desc)
-    qrcode = RQRCode::QRCode.new(product_url)
-
-    @png = qrcode.as_png(
-      bit_depth: 1,
-      border_modules: 4,
-      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
-      color: "black",
-      file: nil,
-      fill: "white",
-      module_px_size: 6,
-      resize_exactly_to: false,
-      resize_gte_to: false,
-      size: 250
-    )
+    @qrcode_png = GetQRCode.new(product_url).call
   end
-
 
   def new
     @product = Product.new

@@ -59,8 +59,8 @@
               <tr>
                  <th>QR Code</th>
                 <td style='text-align: center'>
-                <%= image_tag(@png.to_data_url, size: '120x120') %><br>
-                <%= link_to @png.to_data_url,  class: 'btn btn-sm btn-outline-secondary mb-3', download: @product.name do %>
+                <%= image_tag(@qrcode_png.to_data_url, size: '120x120') %><br>
+                <%= link_to @qrcode_png.to_data_url,  class: 'btn btn-sm btn-outline-secondary mb-3', download: @product.name do %>
                   <%= icon('fa-solid', 'download') %>
                 <% end %>
                 </td>
