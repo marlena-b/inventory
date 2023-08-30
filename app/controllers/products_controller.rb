@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
-  require 'rqrcode'
-
   before_action :authenticate_user!
 
   def index
