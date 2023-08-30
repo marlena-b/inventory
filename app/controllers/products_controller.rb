@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
+  require 'rqrcode'
+
   before_action :authenticate_user!
 
   def index
@@ -10,6 +12,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @stock_adjustments = @product.stock_adjustments.page(params[:page]).per(10).order(created_at: :desc)
+    @qrcode_png = GetQRCode.new(product_url).call
   end
 
   def new
