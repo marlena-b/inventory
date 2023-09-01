@@ -3,12 +3,7 @@
 require 'rails_helper'
 RSpec.describe 'DELETE /products/:id', type: :request do
   context 'with logged in user' do
-    let(:location) { create(:location) }
-    let(:valid_attributes) do
-      { name: 'Product', description: 'Very good product', sku: 154_689,
-        stocks_attributes: { 0 => { location_id: location.id, quantity: 10, low_level: 10 } } }
-    end
-    let!(:product) { create(:product, valid_attributes) }
+    let!(:product) { create(:product) }
     let(:user) { create(:user) }
     before { sign_in user }
 
