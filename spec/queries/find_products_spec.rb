@@ -4,6 +4,15 @@ require 'rails_helper'
 
 RSpec.describe FindProducts do
   describe '#call' do
+    it 'searches by low level' do
+      product1 = create(:product)
+      _product2 = create(:product)
+      _stock = create(:stock, product: product1, low_level: 10, quantity: 5)
+
+      result = FindProducts.new(low_level: '1').call
+      expect(result).to eq([product1])
+    end
+
     it 'searches by category' do
       category1 = create(:category)
       category2 = create(:category)
