@@ -5,6 +5,7 @@ class Location < ApplicationRecord
 
   has_one_attached :image
   has_many :stocks, dependent: :destroy
+  has_many :stock_transfers, dependent: :destroy
 
   validates :name, presence: true
 

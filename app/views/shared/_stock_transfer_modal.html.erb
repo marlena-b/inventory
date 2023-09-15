@@ -8,20 +8,20 @@
       </div>
       <%= form_with url: transfer_product_url, method: :patch do |f| %>
         <%= fields_for :stocks do |stock| %>
-        <div class="modal-body">
-          <div class="col-auto mb-3">
-            <%= stock.label :source_location %>
-            <%= stock.select(:source_location_id, @product.stocks.collect {|stock| [ "#{stock.location.name} (#{stock.quantity})", stock.location_id] }, {}, class: 'form-select') %>
+          <div class="modal-body">
+            <div class="col-auto mb-3">
+              <%= stock.label :source_location %>
+              <%= stock.select(:source_location_id, @product.stocks.collect {|stock| [ "#{stock.location.name} (#{stock.quantity})", stock.location_id] }, {}, class: 'form-select') %>
+            </div>
+            <div class="col-auto mb-3">
+              <%= stock.label :destination_location %>
+              <%= stock.select(:destination_location_id, @product.stocks.collect {|stock| [ "#{stock.location.name} (#{stock.quantity})", stock.location_id] }, {}, class: 'form-select') %>
+            </div>
+            <div class="col-auto mb-3">
+              <%= stock.label :quantity %>
+              <%= stock.number_field :quantity, class: 'form-control', inputmode: 'numeric' %>
+            </div>
           </div>
-          <div class="col-auto mb-3">
-            <%= stock.label :destination_location %>
-            <%= stock.select(:destination_location_id, @product.stocks.collect {|stock| [ "#{stock.location.name} (#{stock.quantity})", stock.location_id] }, {}, class: 'form-select') %>
-          </div>
-          <div class="col-auto mb-3">
-            <%= stock.label :quantity %>
-            <%= stock.number_field :quantity, class: 'form-control', inputmode: 'numeric' %>
-          </div>
-        </div>
         <% end %>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

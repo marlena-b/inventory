@@ -6,6 +6,8 @@ class Product < ApplicationRecord
   belongs_to :category, optional: true
   has_many :stocks, inverse_of: :product, dependent: :destroy
   has_many :stock_adjustments, inverse_of: :product, dependent: :destroy
+  has_many :stock_transfer_products, dependent: :destroy
+  has_many :stock_transfers, through: :stock_transfer_products, dependent: :destroy
   has_one_attached :image
 
   validates :name, presence: true
