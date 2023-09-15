@@ -1,0 +1,81 @@
+<p>
+  <h5>Source location:</h5>
+  <%= @stock_transfer.source_location.name %>
+</p>
+<p>
+  <h5>Destination location:</h5>
+  <%= @stock_transfer.destination_location.name %>
+</p>
+<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#add_products">
+  <%= icon('fa-solid', 'plus') %>
+</button>
+<div class="modal fade" id="add_products" tabindex="-1" aria-labelledby="addProductslLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addProductsLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with url: add_transfer_products_url, method: :post do |f| %>
+        <div class="modal-body">
+          <%= turbo_frame_tag 'modal_content' do %>
+            <ul class="list-group", id="modal-content-list">
+              <% added_product_ids = @stock_transfer.stock_transfer_products.pluck(:product_id) %>
+              <% @stock_transfer_stocks_paginated.each do |stock| %>
+                <% next if added_product_ids.include?(stock.product.id) %>
+                <li class="list-group-item">
+                  <%= f.check_box :product_ids, {multiple: true, value: stock.product.id, id: "product_#{stock.product.id}"}, stock.product.id, nil %>
+                  <%= f.label :product_ids, stock.product.name, for: "product_#{stock.product.id}", class: "form-check-label" %>
+                  <%= f.number_field "quantities[#{stock.product.id}]", placeholder: 'Quantity', class: 'form-control' %>
+                </li>
+              <% end %>
+            </ul>
+            <%= paginate @stock_transfer_stocks_paginated, remote: true, theme: 'bootstrap-5', pagination_class: "pagination justify-content-end" %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= f.submit "Save changes", type:"submit", class:"btn btn-primary"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% if @stock_transfer.stock_transfer_products.present? %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">
+        <strong> Stock transfer </strong>
+      </h5>
+      <%= form_with url: update_bulk_stock_transfer_products_path, method: :patch do |f| %>
+        <table class="table inventory-table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Quantity</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @stock_transfer.stock_transfer_products.each do |stock_transfer_product| %>
+              <tr>
+                <td>
+                  <%= stock_transfer_product.product.name %>
+                </td>
+                <td>
+                  <%= f.number_field "stock_transfer_products[#{stock_transfer_product.id}][quantity]", value: stock_transfer_product.quantity, min: 0, class: 'form-control' %>
+                </td>
+                <td>
+                  <%= link_to stock_transfer_product_path(stock_transfer_product), class: 'button mb-3 link-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+                    <%= icon('fa-solid', 'trash-can') %> Delete
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= f.submit 'Update All Quantities', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
