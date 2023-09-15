@@ -8,13 +8,17 @@
 </div>
 
 <div class="px-4 mb-5 my-5 ">
-  <div class="col-lg-10 col-xl-7 col-md-auto mx-auto">
+  <div class="col-lg-10 col-xl-8 col-md-auto mx-auto">
     <%= form_with(url: products_path, method: :get, class: "row") do |form| %>
-      <div class="col-lg-7 mb-1">
+      <div class="col-lg-5 mb-1">
         <%= form.text_field :search_term, class: "form-control", placeholder: "Search products...", value: params[:search_term] %>
       </div>
       <div class="col-lg-3">
         <%= form.collection_select :category_id, Category.all, :id, :name, {include_blank: "All categories", selected: params[:category_id]}, {class:"form-select mb-3"} %>
+      </div>
+      <div class="col-lg-2 form-check">
+        <%= form.check_box(:low_level, checked: params[:low_level] == '1', class:'form-check-input')%>
+        <%= label_tag(:low_level, "Low stock", class:'form-check-label') %>
       </div>
       <div class="col-md-2">
       <%= form.submit "Search", class: "btn btn-outline-secondary mb-3" %>
