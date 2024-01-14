@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = FindProducts.new(params).call.page(params[:page]).per(10)
+    @products = ProductDecorator.decorate_collection(@products)
   end
 
   def show

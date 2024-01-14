@@ -6,13 +6,4 @@ module ProductsHelper
 
     quantity.to_s
   end
-
-  def stock_warnings(product)
-    low_stock_sum = product.stocks.count(&:low_stock?)
-    return unless low_stock_sum.positive?
-
-    "<span class='badge text-bg-warning'>
-    Low stock in #{low_stock_sum} #{'location'.pluralize(low_stock_sum)}.
-    </span>".html_safe
-  end
 end
