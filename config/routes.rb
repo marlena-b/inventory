@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   patch '/products/:id/transfer', to: 'stocks#transfer', as: 'transfer_product'
   resources :locations
   resources :categories
-  resources :stocks, only: :update
+  resources :stocks, only: [:update, :edit]
 end

@@ -100,9 +100,9 @@
                     <% end %>
                   </td>
                   <td style="text-align:right">
-                    <button type="button" class="btn btn-outline-primary btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal<%= stock.id %>">
+                    <%= link_to edit_stock_path(stock), class: "btn btn-outline-primary btn-sm ms-2" do %>
                       <%= icon('fa-solid', 'pen') %>
-                    </button>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>
