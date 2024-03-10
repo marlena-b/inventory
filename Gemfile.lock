@@ -114,6 +114,7 @@ GEM
     diff-lcs (1.5.0)
     dockerfile-rails (1.5.2)
       rails
+    dotenv (3.1.0)
     erubi (1.12.0)
     execjs (2.8.1)
     factory_bot (6.2.1)
@@ -292,6 +293,11 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sentry-rails (5.16.1)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.16.1)
+    sentry-ruby (5.16.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -299,6 +305,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stackprof (0.2.26)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     thor (1.2.2)
@@ -337,6 +344,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   dockerfile-rails (>= 1.5)
+  dotenv
   factory_bot_rails
   faker
   font-awesome-sass (~> 6.4.0)
@@ -352,7 +360,10 @@ DEPENDENCIES
   rspec-rails (~> 6.0.0)
   rubocop
   rubocop-rails
+  sentry-rails
+  sentry-ruby
   sprockets-rails
+  stackprof
   stimulus-rails
   turbo-rails
   tzinfo-data
