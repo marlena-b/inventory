@@ -88,3 +88,11 @@ gem 'dockerfile-rails', '>= 1.5', group: :development
 gem 'redis', '~> 5.0'
 
 gem 'rqrcode'
+
+gem 'sentry-ruby'
+
+gem 'sentry-rails'
+
+gem 'stackprof'
+
+gem 'dotenv', groups: [:development, :test]
