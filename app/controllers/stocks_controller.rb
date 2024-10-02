@@ -3,17 +3,19 @@
 class StocksController < ApplicationController
   before_action :authenticate_user!
 
-  # rubocop:disable Metrics/AbcSize
+  def edit
+    @stock = Stock.find(params[:id])
+    @stock_adjustment_form = StockAdjustmentForm.new(current_user, @stock)
+  end
+
   def update
-    stock = Stock.find(params[:id])
-    AdjustStockService.new(
-      user: current_user,
-      stock:,
-      quantity_after_adjustment: params[:stock][:quantity],
-      reason: params[:stock][:reason],
-      note: params[:stock][:note].presence
-    ).call
-    redirect_back_or_to stock.product
+    @stock = Stock.find(params[:id])
+    @stock_adjustment_form = StockAdjustmentForm.new(current_user, @stock, params)
+    if @stock_adjustment_form.save
+      redirect_to @stock.product, status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   # rubocop:enable Metrics/AbcSize

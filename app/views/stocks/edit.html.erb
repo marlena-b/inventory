@@ -1,0 +1,20 @@
+<%= form_with model: @stock_adjustment_form, url: stock_path(@stock), method: :patch do |f| %>
+  <div>
+    <%= render 'shared/errors', object: @stock_adjustment_form %>
+    <div class="col-auto mb-3">
+      <%= f.label :quantity %>
+      <%= f.number_field :quantity, class: 'form-control', inputmode: 'numeric' %>
+    </div>
+      <div class="col-auto mb-3">
+      <%= f.label :reason %>
+      <%= f.select :reason, StockAdjustment::REASONS, {}, class: 'form-select' %>
+    </div>
+    <div class="col-auto mb-3">
+      <%= f.label :note %>
+      <%= f.text_field :note, class: 'form-control' %>
+    </div>
+  </div>
+  <div>
+    <%= f.submit "Save changes", type:"submit", class:"btn btn-primary"%>
+  </div>
+<% end %>
