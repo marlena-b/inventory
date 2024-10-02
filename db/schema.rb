@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_13_113753) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_124548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,6 +80,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_113753) do
     t.index ["user_id"], name: "index_stock_adjustments_on_user_id"
   end
 
+  create_table "stock_transfer_products", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "stock_transfer_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_stock_transfer_products_on_product_id"
+    t.index ["stock_transfer_id"], name: "index_stock_transfer_products_on_stock_transfer_id"
+  end
+
+  create_table "stock_transfers", force: :cascade do |t|
+    t.bigint "source_location_id", null: false
+    t.bigint "destination_location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["destination_location_id"], name: "index_stock_transfers_on_destination_location_id"
+    t.index ["source_location_id"], name: "index_stock_transfers_on_source_location_id"
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "location_id", null: false
@@ -110,6 +129,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_13_113753) do
   add_foreign_key "stock_adjustments", "locations"
   add_foreign_key "stock_adjustments", "products"
   add_foreign_key "stock_adjustments", "users"
+  add_foreign_key "stock_transfer_products", "products"
+  add_foreign_key "stock_transfer_products", "stock_transfers"
+  add_foreign_key "stock_transfers", "locations", column: "destination_location_id"
+  add_foreign_key "stock_transfers", "locations", column: "source_location_id"
   add_foreign_key "stocks", "locations"
   add_foreign_key "stocks", "products"
 end

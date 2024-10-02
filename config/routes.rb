@@ -13,4 +13,10 @@ Rails.application.routes.draw do
   resources :locations
   resources :categories
   resources :stocks, only: :update
+  resources :stock_transfer_products, only: :destroy
+  patch 'stock_transfer_products/update_bulk', to: 'stock_transfer_products#update_bulk',
+                                               as: 'update_bulk_stock_transfer_products'
+  resources :stock_transfers
+  get '/stock_transfers/:id/products', to: 'stock_transfers#add_products_new', as: 'add_transfer_products_new'
+  post '/stock_transfers/:id/products', to: 'stock_transfers#add_products', as: 'add_transfer_products'
 end

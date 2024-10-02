@@ -1,0 +1,21 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <h1>Choose location</h1>
+    <div class="border rounded bg-white p-4">
+      <%= form_with(model: @stock_transfer) do |f| %>
+        <%= render 'shared/errors', object: @stock_transfer %>
+        <div class="col-auto mb-3">
+          <%= f.label :destination_location, class: 'h5' %>
+          <%= f.collection_select :destination_location_id, Location.all, :id, :name, {}, class: 'form-select' %>
+        </div>
+        <div class="col-auto mb-3">
+          <%= f.label :source_location, class: 'h5' %>
+          <%= f.collection_select :source_location_id, Location.all, :id, :name, {}, class: 'form-select' %>
+        </div>
+        <div class="col-auto">
+          <%= f.submit 'Next', type: 'submit', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
